@@ -10,13 +10,13 @@
             --bg-color: #f0f4f8;
             --card-bg: #ffffff;
             --text-color: #2d3748;
-            --primary-color: #2b6cb0;
+            --primary-color: #2c5282;
             --secondary-color: #4299e1;
             --accent-color: #3182ce;
-            --success-color: #48bb78;
-            --danger-color: #f56565;
-            --border-radius: 12px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --success-color: #38a169;
+            --danger-color: #e53e3e;
+            --border-radius: 16px;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
             --font-main: 'Tajawal', sans-serif;
         }
 
@@ -24,13 +24,13 @@
             :root {
                 --bg-color: #1a202c;
                 --card-bg: #2d3748;
-                --text-color: #e2e8f0;
+                --text-color: #f7fafc;
                 --primary-color: #90cdf4;
                 --secondary-color: #63b3ed;
                 --accent-color: #4299e1;
-                --success-color: #48bb78;
-                --danger-color: #f56565;
-                --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+                --success-color: #68d391;
+                --danger-color: #fc8181;
+                --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
             }
         }
 
@@ -38,23 +38,25 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            outline: none;
         }
 
         body {
             font-family: var(--font-main);
             background-color: var(--bg-color);
             color: var(--text-color);
-            line-height: 1.6;
+            line-height: 1.8;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            transition: background-color 0.3s, color 0.3s;
+            transition: all 0.3s ease;
         }
 
         .container {
-            width: 95%;
-            max-width: 800px;
-            margin: 20px auto;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
             flex: 1;
             display: flex;
             flex-direction: column;
@@ -63,65 +65,143 @@
         header {
             text-align: center;
             margin-bottom: 2rem;
-            padding: 1rem;
-            background: var(--card-bg);
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            border-bottom: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
         }
 
         header h1 {
-            color: var(--primary-color);
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         header p {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 1.1rem;
+            opacity: 0.9;
+            position: relative;
         }
 
         .screen {
             display: none;
             background: var(--card-bg);
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--border-radius);
             box-shadow: var(--shadow);
-            animation: fadeIn 0.4s ease-in-out;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
         .screen.active {
             display: block;
         }
 
+        /* Search Box Styles */
+        .search-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1.2rem 3rem 1.2rem 1.2rem;
+            border-radius: 12px;
+            border: 2px solid rgba(0,0,0,0.1);
+            font-family: var(--font-main);
+            font-size: 1.1rem;
+            background: var(--bg-color);
+            color: var(--text-color);
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: var(--secondary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
         .grid-menu {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
 
         button {
             font-family: var(--font-main);
             border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 600;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         button:active {
-            transform: scale(0.98);
+            transform: translateY(0);
         }
 
         .main-btn {
             background: var(--primary-color);
+            color: #fff;
+            grid-column: 1 / -1;
+            font-size: 1.4rem;
+            padding: 1.8rem;
+        }
+
+        .simulation-btn {
+            background: linear-gradient(to right, #805ad5, #6b46c1);
+            color: white;
+            grid-column: 1 / -1;
+            font-size: 1.3rem;
+            padding: 1.5rem;
+        }
+
+        .resume-btn {
+            background: var(--success-color);
             color: white;
             grid-column: 1 / -1;
             font-size: 1.2rem;
-            padding: 1.5rem;
+            margin-bottom: 1rem;
+            display: none; /* Hidden by default */
+        }
+
+        /* Dark mode specific for main button text */
+        @media (prefers-color-scheme: dark) {
+            .main-btn, .simulation-btn, .resume-btn { color: #fff; }
         }
 
         .sec-btn {
@@ -135,53 +215,78 @@
             color: white;
         }
 
-        /* Quiz Screen Styles */
-        .progress-bar {
+        /* Quiz Styles */
+        .header-bar {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 1.5rem;
-            font-size: 0.9rem;
-            color: var(--secondary-color);
-            font-weight: bold;
-            border-bottom: 2px solid #edf2f7;
-            padding-bottom: 10px;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0,0,0,0.05);
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
-        .question-container h3 {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
+        .progress-text {
+            color: var(--secondary-color);
+            font-weight: 800;
+        }
+
+        .timer-badge {
+            background: #e53e3e;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .score-badge {
+            background: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2.5rem;
             color: var(--text-color);
+            line-height: 1.6;
         }
 
         .options-grid {
             display: flex;
             flex-direction: column;
-            gap: 0.8rem;
+            gap: 1rem;
         }
 
         .option-btn {
             background: rgba(0,0,0,0.03);
-            border: 1px solid rgba(0,0,0,0.1);
+            border: 2px solid transparent;
             color: var(--text-color);
             text-align: right;
-            padding: 1rem;
-            border-radius: 8px;
-            font-size: 1rem;
+            padding: 1.2rem;
+            border-radius: 12px;
+            font-size: 1.1rem;
             position: relative;
-            overflow: hidden;
+            transition: all 0.2s;
+            justify-content: flex-start;
         }
 
-        /* Dark mode specific fix for buttons */
         @media (prefers-color-scheme: dark) {
-            .option-btn {
-                background: rgba(255,255,255,0.05);
-                border-color: rgba(255,255,255,0.1);
-            }
+            .option-btn { background: rgba(255,255,255,0.05); }
         }
 
         .option-btn:hover:not(:disabled) {
-            background: rgba(66, 153, 225, 0.1);
             border-color: var(--secondary-color);
+            background: rgba(66, 153, 225, 0.05);
         }
 
         .option-btn.correct {
@@ -197,7 +302,7 @@
         }
 
         .action-btn {
-            background: var(--primary-color);
+            background: var(--secondary-color);
             color: white;
             width: 100%;
             margin-top: 2rem;
@@ -205,64 +310,68 @@
             display: none;
         }
 
-        /* Result Screen */
-        .score-card {
-            text-align: center;
-            margin: 2rem 0;
-            padding: 2rem;
-            background: rgba(66, 153, 225, 0.1);
-            border-radius: var(--border-radius);
+        /* Result Styles */
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--success-color) calc(var(--percentage) * 1%), rgba(0,0,0,0.1) 0);
+            margin: 0 auto 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 130px;
+            height: 130px;
+            background: var(--card-bg);
+            border-radius: 50%;
         }
 
         .score-number {
+            position: relative;
             font-size: 2.5rem;
             font-weight: 800;
-            color: var(--primary-color);
-            display: block;
-            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
         .review-list {
-            margin-top: 1rem;
-            max-height: 500px;
+            margin-top: 2rem;
+            max-height: 60vh;
             overflow-y: auto;
-            padding-right: 5px;
-        }
-
-        .review-list::-webkit-scrollbar {
-            width: 8px;
-        }
-        .review-list::-webkit-scrollbar-thumb {
-            background-color: #cbd5e0;
-            border-radius: 4px;
+            padding-right: 10px;
         }
 
         .review-item {
             background: rgba(0,0,0,0.02);
-            padding: 1rem;
-            border-radius: 8px;
+            padding: 1.5rem;
+            border-radius: 12px;
             margin-bottom: 1rem;
-            border-right: 4px solid var(--danger-color);
+            border-right: 5px solid var(--danger-color);
         }
-
-        .review-q { font-weight: bold; margin-bottom: 0.5rem; display: block; }
-        .review-wrong { color: var(--danger-color); font-size: 0.9rem; }
-        .review-correct { color: var(--success-color); font-weight: bold; font-size: 0.9rem; }
 
         footer {
             text-align: center;
             padding: 2rem;
             margin-top: auto;
-            font-size: 0.85rem;
             color: var(--text-color);
-            opacity: 0.8;
-            border-top: 1px solid rgba(0,0,0,0.1);
+            opacity: 0.7;
+            font-size: 0.9rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 4px; }
     </style>
 </head>
 <body>
@@ -270,48 +379,83 @@
     <div class="container">
         <header>
             <h1>بنك أسئلة مهارات الاتصال</h1>
-            <p>يحتوي على 244 سؤال (اختبارات، واجبات، تقييمات)</p>
+            <p>244 سؤال شاملة (اختبارات، واجبات، تقييمات) مع محاكاة للاختبار</p>
         </header>
 
         <!-- Main Menu -->
         <div id="start-screen" class="screen active">
-            <h2 style="margin-bottom:1rem; text-align:center;">اختر نوع الاختبار</h2>
+            <!-- Save Progress Alert -->
+            <button id="resume-btn" onclick="resumeQuiz()" class="resume-btn">
+                <span>↩️</span> إكمال الاختبار السابق (سؤال <span id="saved-q-num"></span>)
+            </button>
+
+            <h2 style="text-align:center; margin-bottom:1.5rem;">اختر نوع الاختبار</h2>
+            
+            <!-- Search Box -->
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="search-input" class="search-input" placeholder="ابحث عن سؤال أو كلمة (مثلاً: التفاوض)...">
+            </div>
+
             <div class="grid-menu">
-                <button onclick="startQuiz('all')" class="main-btn">الاختبار الشامل (جميع الأسئلة)</button>
+                <button onclick="startQuiz('simulation')" class="simulation-btn">
+                    <span>🎓</span> اختبار تجريبي (محاكاة 50 سؤال)
+                </button>
                 
-                <button onclick="startQuiz('exam1445')" class="sec-btn">اختبار الفصل الثالث 1445هـ</button>
-                <button onclick="startQuiz('exam1444')" class="sec-btn">اختبار الفصل الثاني 1444هـ</button>
-                <button onclick="startQuiz('exam1443')" class="sec-btn">اختبار الفصل الثاني 1443هـ</button>
+                <button onclick="startQuiz('all')" class="main-btn">
+                    <span>🚀</span> الاختبار الشامل (244 سؤال)
+                </button>
                 
-                <button onclick="startQuiz('weekly')" class="sec-btn">التقييمات الأسبوعية (الفصول)</button>
-                <button onclick="startQuiz('assignments')" class="sec-btn">الواجبات والتقييم الذاتي</button>
+                <button onclick="startQuiz('exam1445')" class="sec-btn">
+                    <span>📅</span> 1445هـ
+                </button>
+                <button onclick="startQuiz('exam1444')" class="sec-btn">
+                    <span>📅</span> 1444هـ
+                </button>
+                <button onclick="startQuiz('exam1443')" class="sec-btn">
+                    <span>📅</span> 1443هـ
+                </button>
+                
+                <button onclick="startQuiz('weekly')" class="sec-btn">
+                    <span>📝</span> التقييمات الأسبوعية
+                </button>
+                <button onclick="startQuiz('assignments')" class="sec-btn">
+                    <span>📚</span> الواجبات
+                </button>
             </div>
         </div>
 
         <!-- Quiz Interface -->
         <div id="quiz-screen" class="screen">
-            <div class="progress-bar">
-                <span id="progress-text">السؤال 1 من 100</span>
-                <span id="score-live">النتيجة: 0</span>
+            <div class="header-bar">
+                <span id="progress-text" class="progress-text">السؤال 1 من 244</span>
+                <span id="timer-display" class="timer-badge" style="display:none;">⏳ 60:00</span>
+                <span id="score-live" class="score-badge">النتيجة: 0</span>
             </div>
             <div class="question-container">
-                <h3 id="question-text">...</h3>
+                <h3 id="question-text" class="question-text">...</h3>
             </div>
             <div id="options-container" class="options-grid"></div>
-            <button id="next-btn" class="action-btn">السؤال التالي</button>
+            <button id="next-btn" class="action-btn">السؤال التالي ⬅️</button>
         </div>
 
         <!-- Results -->
         <div id="result-screen" class="screen">
-            <h2 style="text-align:center;">نتيجة الاختبار</h2>
-            <div class="score-card">
-                <span class="score-number" id="final-score">0%</span>
-                <p id="final-msg">...</p>
-                <p id="final-details" style="font-size:0.9rem; margin-top:0.5rem;">...</p>
+            <h2 style="text-align:center; margin-bottom:2rem;">نتيجة الاختبار</h2>
+            <div class="score-card" style="text-align:center;">
+                <div class="score-circle" id="score-circle">
+                    <span class="score-number" id="final-score">0%</span>
+                </div>
+                <h3 id="final-msg" style="margin-bottom:0.5rem;">...</h3>
+                <p id="final-details" style="opacity:0.8;">...</p>
             </div>
-            <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
-                <button id="review-btn" onclick="showReview()" class="sec-btn" style="flex:1;">مراجعة الأخطاء</button>
-                <button onclick="goHome()" class="main-btn" style="flex:1; background:var(--text-color);">القائمة الرئيسية</button>
+            <div class="grid-menu" style="grid-template-columns: 1fr 1fr; margin-top:2rem;">
+                <button id="review-btn" onclick="showReview()" class="sec-btn" style="border-color:var(--danger-color); color:var(--danger-color);">
+                    <span>🔍</span> مراجعة الأخطاء
+                </button>
+                <button onclick="goHome()" class="main-btn">
+                    <span>🏠</span> القائمة الرئيسية
+                </button>
             </div>
         </div>
 
@@ -319,113 +463,140 @@
         <div id="review-screen" class="screen">
             <h2 style="margin-bottom:1rem;">مراجعة الإجابات الخاطئة</h2>
             <div id="review-list" class="review-list"></div>
-            <button onclick="goHome()" class="action-btn" style="display:block;">إنهاء المراجعة</button>
+            <button onclick="goHome()" class="action-btn" style="display:block;">إنهاء المراجعة 🏁</button>
         </div>
     </div>
 
     <footer>
         <p>تطوير: <strong>محمد عثمان صديق حكمي</strong></p>
-        <p>اللهم انفعنا بما علمتنا، وعلمنا ما ينفعنا، وزدنا علماً</p>
+        <p style="margin-top:5px; font-size:0.8rem;">اللهم انفعنا بما علمتنا، وعلمنا ما ينفعنا، وزدنا علماً</p>
     </footer>
 
     <script>
-        // --- Database ---
+        // --- Database (Full 244 Questions) ---
         const quizData = [
-            // --- Assignments (Assignments & Self Assessment) ---
+            // --- Assignments (10 Questions) ---
             { category: "assignments", question: "الطريقة التي يتم بواسطتها تبادل المعلومات والأفكار والآراء بين المرسل والمستقبل عن طريق الكلمة المكتوبة:", options: ["مهارات الاتصال الكتابي", "مهارات الاتصال اللفظي", "مهارات الاتصال المهاري", "مهارات الاتصال المستقل"], answer: "مهارات الاتصال الكتابي" },
-            { category: "assignments", question: "هي عبارة عن المهارات المتعلقة بالأساليب السلوكية التي يتبعها الملقي بما يؤثر إيجابياً على الحضور مثل المظهر وأسلوب الكلام:", options: ["مهارة العروض السلوكية", "مهارة كسر الجمود", "مهارة العروض الفنية", "مهارة الانصات"], answer: "مهارة العروض السلوكية" },
+            { category: "assignments", question: "المهارات المتعلقة بالأساليب السلوكية التي يتبعها الملقي بما يؤثر إيجابياً على الحضور مثل المظهر وأسلوب الكلام:", options: ["مهارة العروض السلوكية", "مهارة كسر الجمود", "مهارة العروض الفنية", "مهارة الانصات"], answer: "مهارة العروض السلوكية" },
             { category: "assignments", question: "يعد ... المحور الرئيسي في عملية الاتصال وعليه يقع العبء الأكبر في فاعلية وكفاءة عملية الاتصال:", options: ["المرسل", "المستقبل", "الرسالة", "الانترنت"], answer: "المرسل" },
-            { category: "assignments", question: "هو عبارة عن الحوار الذي يتم مع الفرد وذاته حيث يكون الفرد في عملية مصارحة مع الذات:", options: ["الحوار الداخلي", "الحوار الافقي", "الحوار الاني", "الحوار الدخيل"], answer: "الحوار الداخلي" },
+            { category: "assignments", question: "الحوار الذي يتم مع الفرد وذاته حيث يكون الفرد في عملية مصارحة مع الذات:", options: ["الحوار الداخلي", "الحوار الافقي", "الحوار الاني", "الحوار الدخيل"], answer: "الحوار الداخلي" },
             { category: "assignments", question: "صعوبة التعرف على الظروف البيئية للطرف الآخر تعتبر من:", options: ["سلبيات الهاتف", "سلبيات الانترنت", "إيجابيات الهاتف", "إيجابيات الانترنت"], answer: "سلبيات الهاتف" },
-            { category: "assignments", question: "هو موقف تعبيري حركي قائم بين طرفين او اكثر حول قضية من القضايا يتم من خلاله عرض وتبادل وتقريب وجهات النظر:", options: ["التفاوض", "التحاور", "التقديم", "التوريد"], answer: "التفاوض" },
+            { category: "assignments", question: "موقف تعبيري حركي قائم بين طرفين او اكثر حول قضية من القضايا يتم من خلاله عرض وتبادل وتقريب وجهات النظر:", options: ["التفاوض", "التحاور", "التقديم", "التوريد"], answer: "التفاوض" },
             { category: "assignments", question: "تعتبر من الآثار الإيجابية لاستخدام الانترنت:", options: ["المساعدة على تعليم لغات اجنبية", "أضرار العقائدية", "أضرار الصحية", "أضرار نفسية"], answer: "المساعدة على تعليم لغات اجنبية" },
             { category: "assignments", question: "مجموعة من الأفراد يعملون مع بعضهم البعض لأجل تحقيق أهداف محددة مشتركة:", options: ["الفريق", "الإدارة العليا", "الموارد البشرية", "إدارة الاعمال"], answer: "الفريق" },
-            { category: "assignments", question: "هي المنطقة التي تحوي معلومات غير معروفة من الجميع وتمثل جميع ابعاد شخصياتنا والتي لم يتم اكتشافها حتى الان:", options: ["المنطقة المجهولة", "المنطقة العمياء", "منطقة الأسرار", "المنطقة المكشوفة"], answer: "المنطقة المجهولة" },
-            { category: "assignments", question: "مهارة التعرف على الكلمات والحروف وتحويلها الى معاني ومدركات لدى الفرد بحيث تصل المعاني الحقيقية:", options: ["مهارة القراءة", "مهارة الاستماع", "مهارة الاتصال الشفهي", "مهارة الالقاء"], answer: "مهارة القراءة" },
-            { category: "assignments", question: "هي عبارة عن فن ومهارة مواجهة ومشافهة الحضور:", options: ["مهارة الالقاء", "مهارة الاستماع", "مهارة الاتصال الشفهي", "مهارة القراءة"], answer: "مهارة الالقاء" },
+            { category: "assignments", question: "المنطقة التي تحوي معلومات غير معروفة من الجميع وتمثل جميع ابعاد شخصياتنا والتي لم يتم اكتشافها حتى الان:", options: ["المنطقة المجهولة", "المنطقة العمياء", "منطقة الأسرار", "المنطقة المكشوفة"], answer: "المنطقة المجهولة" },
+            { category: "assignments", question: "عناصر التفاوض الرئيسية تشمل:", options: ["الموقف التفاوضي", "أطراف الوظيفة", "الهدف الاستراتيجي", "الاستراتيجية"], answer: "الموقف التفاوضي" },
+
+            // --- Self Assessment (15 Questions) ---
+            { category: "assignments", question: "مهارة التعرف على الكلمات والحروف وتحويلها الى معاني ومدركات لدى الفرد:", options: ["مهارة القراءة", "مهارة الاستماع", "مهارة الاتصال الشفهي", "مهارة الالقاء"], answer: "مهارة القراءة" },
+            { category: "assignments", question: "فن ومهارة مواجهة ومشافهة الحضور:", options: ["مهارة الالقاء", "مهارة الاستماع", "مهارة الاتصال الشفهي", "مهارة القراءة"], answer: "مهارة الالقاء" },
             { category: "assignments", question: "يقصد بها اتخاذ الاجراء المطلوب من الرسالة والذي يقصده المرسل من رسالته:", options: ["الاستجابة للرسالة", "فك ترميز الرسالة", "استقبال الرسالة", "المرسل"], answer: "الاستجابة للرسالة" },
             { category: "assignments", question: "تعتبر احد أنواع الاتصال:", options: ["الاتصال الكتابي", "الاتصال الديموقراطي", "الاتصال الجانبي", "الاتصال التوازني"], answer: "الاتصال الكتابي" },
             { category: "assignments", question: "المهارة التي من خلالها يستطيع الفرد جذب انتباه الحضور بصفة مستمرة حتى نهاية العرض:", options: ["مهارة كسر الجمود", "مهارة العروض التقدمية", "مهارات العروض السلوكية", "مهارات التقسيم"], answer: "مهارة كسر الجمود" },
-            { category: "assignments", question: "تعتبر من عناصر التفاوض الرئيسية:", options: ["الموقف التفاوضي", "أطراف الوظيفة", "الهدف الاستراتيجي", "الاستراتيجية"], answer: "الموقف التفاوضي" },
+            { category: "assignments", question: "تعتبر من عناصر التفاوض الرئيسية (سؤال مكرر في التقييم):", options: ["الموقف التفاوضي", "أطراف الوظيفة", "الهدف الاستراتيجي", "الاستراتيجية"], answer: "الموقف التفاوضي" },
             { category: "assignments", question: "تعتبر من مكونات العرض:", options: ["المقدمة", "الديباجة", "الارتجال", "الملاحظات"], answer: "المقدمة" },
             { category: "assignments", question: "تعتبر من التعزيزات الايجابية التي يمكن استخدامها في إقناع الآخرين:", options: ["المدح", "الوزن", "عدم المقايضة", "الاتباع"], answer: "المدح" },
-            { category: "assignments", question: "هو الحوار الذي يتم بين الأفراد المتشابهين أو المتقاربين في الصفات بهدف تبادل الأفكار:", options: ["الحوار الافقي", "الحوار الداخلي", "الحوار الموزون", "الحوار الهادئ"], answer: "الحوار الافقي" },
+            { category: "assignments", question: "الحوار الذي يتم بين الأفراد المتشابهين أو المتقاربين في الصفات بهدف تبادل الأفكار:", options: ["الحوار الافقي", "الحوار الداخلي", "الحوار الموزون", "الحوار الهادئ"], answer: "الحوار الافقي" },
             { category: "assignments", question: "يعتبر الانفاق على استعمال الشبكة من:", options: ["الاضرار الاقتصادية", "الاضرار الاجتماعية", "الاضرار السلوكية", "الاضرار الاخلاقية"], answer: "الاضرار الاقتصادية" },
-            { category: "assignments", question: "هي المنطقة التي تحوي المعلومات التي يتعمد الفرد بإخفائها عن الآخرين:", options: ["منطقة الاسرار", "منطقة العمياء", "منطقة المجهولة", "منطقة المكشوفة"], answer: "منطقة الاسرار" },
+            { category: "assignments", question: "المنطقة التي تحوي معلومات التي يتعمد الفرد بإخفائها عن الآخرين:", options: ["منطقة الاسرار", "منطقة العمياء", "منطقة المجهولة", "منطقة المكشوفة"], answer: "منطقة الاسرار" },
             { category: "assignments", question: "مزيج من الصفات التي تمكن من يحوزها على تحقيق شيء ما عن طريق تأثيره في الآخرين:", options: ["القيادة", "المدير", "الادارة", "التنظيم"], answer: "القيادة" },
             { category: "assignments", question: "إحدى الوسائل الأساسية التي تعتمد عليها الشركات لاختيار كوادرها الوظيفية:", options: ["المقابلات الشخصية", "الاتصال", "الابحاث", "الاحصاءات"], answer: "المقابلات الشخصية" },
+            { category: "assignments", question: "تعتبر ضمان عامل السرية بين طرفي الاتصال من:", options: ["إيجابيات الهاتف", "سلبيات الهاتف", "توازن الهاتف", "حيثيات الهاتف"], answer: "إيجابيات الهاتف" },
+            { category: "assignments", question: "لكي تكون ملقياً بارعاً يجب الحرص على تطبيق مهارات الاتصال الشخصي ومنها:", options: ["تعبيرات الوجه", "تعبيرات المستقبل", "الشعور المعاكس", "العمر"], answer: "تعبيرات الوجه" },
 
-            // --- Weekly Assessments (Weekly) ---
+            // --- Weekly Assessments (84 Questions) ---
+            // Chapter 1
             { category: "weekly", question: "عرف العالم ... الاتصال بأنه تلك العملية الخاصة بنقل المعلومات المفهومة من خلال استخدام الرموز:", options: ["Barry", "Taylor", "كاتلور", "إنشتاين"], answer: "Barry" },
-            { category: "weekly", question: "هو عملية تفاعلية بين شخصين لإيصال رسالة ما عبر وسيلة محددة لتحقيق هدف معين:", options: ["الاتصال", "المكان", "الإدارة", "المجال"], answer: "الاتصال" },
-            { category: "weekly", question: "هي عبارة عن عملية يتم من خلالها تبادل الأفكار والمعلومات والأحاسيس والمشاعر من فرد إلى آخر:", options: ["الاتصال", "التخطيط", "الإدارة", "المجال"], answer: "الاتصال" },
+            { category: "weekly", question: "عملية تفاعلية بين شخصين لإيصال رسالة ما عبر وسيلة محددة لتحقيق هدف معين:", options: ["الاتصال", "المكان", "الإدارة", "المجال"], answer: "الاتصال" },
+            { category: "weekly", question: "عملية يتم من خلالها تبادل الأفكار والمعلومات والأحاسيس والمشاعر من فرد إلى آخر:", options: ["الاتصال", "التخطيط", "الإدارة", "المجال"], answer: "الاتصال" },
             { category: "weekly", question: "الحاجة الى الاقناع تعتبر من أهداف الاتصال المتعلقة بـ:", options: ["الاستجابة للحاجات الاساسية", "الجوانب الاجتماعية", "الجوانب السياسية", "الجوانب الاقتصادية"], answer: "الاستجابة للحاجات الاساسية" },
-            { category: "weekly", question: "هو عبارة عن الطرف الذي يستقبل الرسالة من المرسل:", options: ["المستقبل", "المرسل", "الوسيلة", "الرسالة"], answer: "المستقبل" },
-            { category: "weekly", question: "هي عبارة عن الجو العام المتمثل في المحيط النفسي والمادي الذي يحدث فيه الاتصال:", options: ["بيئة الاتصال", "الادارة", "المستقبل", "التغذية الراجعة"], answer: "بيئة الاتصال" },
+            { category: "weekly", question: "الطرف الذي يستقبل الرسالة من المرسل:", options: ["المستقبل", "المرسل", "الوسيلة", "الرسالة"], answer: "المستقبل" },
+            { category: "weekly", question: "الجو العام المتمثل في المحيط النفسي والمادي الذي يحدث فيه الاتصال:", options: ["بيئة الاتصال", "الادارة", "المستقبل", "التغذية الراجعة"], answer: "بيئة الاتصال" },
+            // Chapter 2
             { category: "weekly", question: "تعتبر أحد خصائص الاتصال:", options: ["عملية ديناميكية", "عملية غير متكاملة", "عملية غير مستمرة", "الرسالة"], answer: "عملية ديناميكية" },
             { category: "weekly", question: "هي عبارة عن أحد أنواع الاتصال:", options: ["الاتصال الجماهيري", "الاتصال الإداري", "الاتصال التنظيمي", "التغذية الراجعة"], answer: "الاتصال الجماهيري" },
             { category: "weekly", question: "تعتبر أحد خطوات عملية التحدث:", options: ["النطق", "الاستشارة", "المستقبل", "المرسل"], answer: "النطق" },
             { category: "weekly", question: "عملية توظيف المهارات اللفظية واللغوية والصوتية ومهارات الفصاحة للتواصل مع الآخرين:", options: ["التحدث", "الادارة", "المستقبل", "التغذية الراجعة"], answer: "التحدث" },
             { category: "weekly", question: "تعتبر أحد معوقات الاتصال:", options: ["الرسالة تحمل معاني و أفكار مشوشة", "الهدف من الاتصال واضح", "هدوء الأصوات", "اشتمال الرسالة على التشويق"], answer: "الرسالة تحمل معاني و أفكار مشوشة" },
             { category: "weekly", question: "تعتبر أحد مهارات الاتصال غير اللفظي:", options: ["لغة الجسد", "المرسل", "المستقبل", "التعبير"], answer: "لغة الجسد" },
+            // Chapter 3
+            { category: "weekly", question: "فن ومهارة مواجهة ومشافهة الحضور:", options: ["الإلقاء", "الاستماع", "العرض", "المجال"], answer: "الإلقاء" },
             { category: "weekly", question: "أشارت الدراسات الى أن نسبة ما نتكلم به هو:", options: ["70%", "30%", "50%", "10%"], answer: "70%" },
             { category: "weekly", question: "تعتبر أحد أهم الصفات التي يجب أن يلم بها الشخص الملقي:", options: ["المهارة اللغوية", "التلعثم", "كثرة الكلام", "عدم الصدق"], answer: "المهارة اللغوية" },
             { category: "weekly", question: "تعتبر أحد مراحل مهارة الالقاء الجيد:", options: ["التدريب المسبق", "الإدارة", "القائد", "الاتصال"], answer: "التدريب المسبق" },
             { category: "weekly", question: "الحضور للمكان المخصص مبكرة تعتبر من الأشياء التي تساعد على التخلص من:", options: ["الخوف", "الحضور", "الافراد", "النوم"], answer: "الخوف" },
             { category: "weekly", question: "التوقف قبل وبعد كل جملة مهمة، لأن الوقفات في بعض المواقف أهم من:", options: ["الكلام نفسه", "القيادة", "الاستماع", "الاتصال"], answer: "الكلام نفسه" },
-            { category: "weekly", question: "تعتبر من أهم المواصفات التي يجب أن تتوفر في العرض الفعال:", options: ["يتجاوز توقعات الحضور", "بعيد عن الحقائق", "غير منهجي", "عدم الإجابة على تساؤلات الجمهور"], answer: "يتجاوز توقعات الحضور" },
-            { category: "weekly", question: "تعتبر آخر مرحلة من العرض، ويجب أن تكون عبارة عن تلخيص لأهم أفكار العرض:", options: ["الخاتمة", "التعبير", "الاتساق", "المقدمة"], answer: "الخاتمة" },
-            { category: "weekly", question: "هو عبارة عن الموضوع والمادة الخصبة التي يدور حولها اللقاء:", options: ["المحتوى", "التعبير", "الخاتمة", "المقدمة"], answer: "المحتوى" },
-            { category: "weekly", question: "تعتبر من المؤشرات الإيجابية التي تدل على تفاعل الجمهور مع مقدم العرض:", options: ["هزة الرأس الإيجابية", "التململ", "العبوس", "كثرة النظر للساعة"], answer: "هزة الرأس الإيجابية" },
-            { category: "weekly", question: "تعتبر من المؤشرات السلبية التي تدل على عدم تفاعل الجمهور مع مقدم العرض:", options: ["اليدان المتقاطعتان على الصدر", "هزة الرأس الإيجابية", "كتابة النقاط", "ميل الجسد للأمام"], answer: "اليدان المتقاطعتان على الصدر" },
-            { category: "weekly", question: "نوع من الحديث بين شخصين، يتم فيه تداول الكلام بينهما بطريقة ما، فلا يستأثر به أحدهما:", options: ["الحوار", "الرسالة", "المرسل", "الهدف"], answer: "الحوار" },
+            // Chapter 4
+            { category: "weekly", question: "المهارة التي من خلالها يستطيع الفرد جذب انتباه الحضور بصفة مستمرة:", options: ["كسر الجمود", "العروض السلوكية", "العروض الفنية", "الحضور"], answer: "كسر الجمود" },
+            { category: "weekly", question: "تعتبر من أهم المواصفات التي يجب أن تتوفر في العرض الفعال:", options: ["يتجاوز توقعات الحضور", "بعيد عن الحقائق", "غير منهجي", "عدم الإجابة"], answer: "يتجاوز توقعات الحضور" },
+            { category: "weekly", question: "آخر مرحلة من العرض، وتكون عبارة عن تلخيص لأهم أفكار العرض:", options: ["الخاتمة", "التعبير", "الاتساق", "المقدمة"], answer: "الخاتمة" },
+            { category: "weekly", question: "الموضوع والمادة الخصبة التي يدور حولها اللقاء:", options: ["المحتوى", "التعبير", "الخاتمة", "المقدمة"], answer: "المحتوى" },
+            { category: "weekly", question: "من المؤشرات الإيجابية التي تدل على تفاعل الجمهور مع مقدم العرض:", options: ["هزة الرأس الإيجابية", "التململ", "العبوس", "كثرة النظر للساعة"], answer: "هزة الرأس الإيجابية" },
+            { category: "weekly", question: "من المؤشرات السلبية التي تدل على عدم تفاعل الجمهور:", options: ["اليدان المتقاطعتان على الصدر", "هزة الرأس الإيجابية", "كتابة النقاط", "ميل الجسد للأمام"], answer: "اليدان المتقاطعتان على الصدر" },
+            // Chapter 5
+            { category: "weekly", question: "نوع من الحديث بين شخصين، يتم فيه تداول الكلام بينهما بطريقة ما:", options: ["الحوار", "الرسالة", "المرسل", "الهدف"], answer: "الحوار" },
+            { category: "weekly", question: "الحوار الذي يتم بين الأفراد المتشابهين في الصفات بهدف تبادل الأفكار:", options: ["الحوار مع الناس", "الحوار مع النفس", "الحوار الذاتي", "التعبير"], answer: "الحوار مع الناس" },
             { category: "weekly", question: "تنمية جانب المحبة والود بين الأفراد تعتبر من:", options: ["فوائد الحوار", "أهداف الحوار", "آداب الحوار", "هدوء الأصوات"], answer: "فوائد الحوار" },
             { category: "weekly", question: "يعتبر الوضوح في طرح الأفكار من صفات:", options: ["المحاور الناجح", "أهداف الحوار", "فوائد الحوار", "المدير"], answer: "المحاور الناجح" },
+            { category: "weekly", question: "تعتبر أحد أساليب التحدث مع الآخر:", options: ["الإقناع", "الرسالة", "التشويق", "الصمت"], answer: "الإقناع" },
             { category: "weekly", question: "تعتبر من طرق وأساليب الاقناع:", options: ["الامثال", "المرسل", "لغة الجسد", "المستقبل"], answer: "الامثال" },
-            { category: "weekly", question: "استخدام الكلمات أو المواقف الإيجابية لتدعيم سلوك الفرد إذا كان في اتجاه الفكرة المراد إقناع الفرد بها:", options: ["استراتيجية التعزيز الايجابي", "استراتيجية العواقب السلبي", "استراتيجية التعزيز الديموقراطي", "هدوء الأصوات"], answer: "استراتيجية التعزيز الايجابي" },
+            // Chapter 6
+            { category: "weekly", question: "استخدام الكلمات أو المواقف الإيجابية لتدعيم سلوك الفرد:", options: ["استراتيجية التعزيز الايجابي", "استراتيجية العواقب السلبي", "استراتيجية التعزيز الديموقراطي", "هدوء الأصوات"], answer: "استراتيجية التعزيز الايجابي" },
             { category: "weekly", question: "إيقاف المكافأت تعتبر من:", options: ["استراتيجية العواقب السلبي", "استراتيجية التعزيز الايجابي", "استراتيجية التعزيز الديموقراطي", "الاتصال"], answer: "استراتيجية العواقب السلبي" },
             { category: "weekly", question: "عملية المباحثات التي تتم بين طرفين أو أكثر ينظر كل منهما للآخر على أنه متحكم في مصادر إشباعات الآخر:", options: ["التفاوض", "الرسالة", "الاقناع", "المرسل"], answer: "التفاوض" },
             { category: "weekly", question: "تعتبر من خصائص عملية التفاوض:", options: ["القضية التفاوضية", "الموقف التفاوضي", "القضية الأخلاقية", "عملية تتأثر بشخصية المفاوضين"], answer: "القضية التفاوضية" },
-            { category: "weekly", question: "الاتفاق على أجندة المفاوضات وما تتضمنه من موضوعات يعتبر الخطوة:", options: ["الثالثة", "الأولى", "الثانية", "الرابعة"], answer: "الثالثة" },
-            { category: "weekly", question: "مراعاة الشكل والمضمون من حيث جودة وصحة ودقة اختيار الالفاظ والتعبيرات يعتبر أحد نقاط:", options: ["الخطوة السادسة", "الخطوة الأولى", "الخطوة الثانية", "الخطوة الرابعة"], answer: "الخطوة السادسة" },
-            { category: "weekly", question: "هو عبارة عن الظروف والعوامل التي تجعل من التفاوض عملية إيجابية:", options: ["شروط عملية التفاوض", "الرسالة", "المدير", "المستقبل"], answer: "شروط عملية التفاوض" },
-            { category: "weekly", question: "المفاوض الذي يتصرف بعدوانية تجاه الطرف الاخر ولا يهتم به أو باحتياجاته:", options: ["المقاتل", "الواقعي", "الهجومي", "التحليلي"], answer: "المقاتل" },
+            { category: "weekly", question: "الاتفاق على أجندة المفاوضات يعتبر الخطوة:", options: ["الثالثة", "الأولى", "الثانية", "الرابعة"], answer: "الثالثة" },
+            { category: "weekly", question: "مراعاة الشكل والمضمون من حيث جودة اختيار الالفاظ يعتبر أحد نقاط:", options: ["الخطوة السادسة", "الخطوة الأولى", "الخطوة الثانية", "الخطوة الرابعة"], answer: "الخطوة السادسة" },
+            // Chapter 7
+            { category: "weekly", question: "الظروف والعوامل التي تجعل من التفاوض عملية إيجابية:", options: ["شروط عملية التفاوض", "الرسالة", "المدير", "المستقبل"], answer: "شروط عملية التفاوض" },
+            { category: "weekly", question: "المفاوض الذي يتصرف بعدوانية تجاه الطرف الاخر ولا يهتم به:", options: ["المقاتل", "الواقعي", "الهجومي", "التحليلي"], answer: "المقاتل" },
+            { category: "weekly", question: "مزيج من الصفات التي تمكن من يحوزها على تحقيق شيء ما عن طريق تأثيره في الآخرين:", options: ["القيادة", "الرسالة", "المدير", "المستقبل"], answer: "القيادة" },
             { category: "weekly", question: "تعتبر أحد عناصر أهمية القيادة:", options: ["وضع استراتيجية راشدة", "عدم مواكبة المتغيرات", "عدم تنمية الافراد", "عدم إعادة التوازن"], answer: "وضع استراتيجية راشدة" },
-            { category: "weekly", question: "هي القيادة التي تقوم على أساس إعطاء الأفراد الحرية المطلقة:", options: ["القيادة الحرة", "النمط الديموقراطي", "التسلطية", "البيروقراطية"], answer: "القيادة الحرة" },
+            { category: "weekly", question: "القيادة التي تقوم على أساس إعطاء الأفراد الحرية المطلقة:", options: ["القيادة الحرة", "النمط الديموقراطي", "التسلطية", "البيروقراطية"], answer: "القيادة الحرة" },
             { category: "weekly", question: "تعتبر أحد الخصائص المميزة للقادة:", options: ["التخطيط والتنظيم", "اتخاذ قرارات تعسفية", "يتجاهل التفويض", "لا يمتلك رؤية ثاقبة"], answer: "التخطيط والتنظيم" },
+            // Chapter 8
             { category: "weekly", question: "الاتصال الذي يتم من خلاله نقل المعرفة والأفكار باستخدام الأنظمة والوسائط المعلوماتية:", options: ["الاتصال الالكتروني", "المرسل", "التفاوض", "البرنامج"], answer: "الاتصال الالكتروني" },
-            { category: "weekly", question: "وفيها يمكن توجيه التواصل الالكتروني إلى فرد، أو مجموعة معينة من الافراد:", options: ["اللاجماهيرية", "الشيوع والانتشار", "اللاتزامنية", "العالمية"], answer: "اللاجماهيرية" },
-            { category: "weekly", question: "يستخدم في نقل الرسائل الصوتية بين المرسل والمستقبل على نطاق واسع في التواصل بين الإدارات:", options: ["الهاتف الثابت", "الجوال", "الهاتف المرئي", "المستقبل"], answer: "الهاتف الثابت" },
+            { category: "weekly", question: "يمكن توجيه التواصل الالكتروني إلى فرد، أو مجموعة معينة من الافراد:", options: ["اللاجماهيرية", "الشيوع والانتشار", "اللاتزامنية", "العالمية"], answer: "اللاجماهيرية" },
+            { category: "weekly", question: "يستخدم في نقل الرسائل الصوتية بين المرسل والمستقبل على نطاق واسع في قطاع الاعمال:", options: ["الهاتف الثابت", "الجوال", "الهاتف المرئي", "المستقبل"], answer: "الهاتف الثابت" },
             { category: "weekly", question: "يعتبر نقل الرسالة الصوتية بصورة فورية من:", options: ["إيجابيات الهاتف", "سلبيات الهاتف", "سلبيات المرسل", "الرسالة"], answer: "إيجابيات الهاتف" },
             { category: "weekly", question: "الإصابة بالأمراض النفسية تعتبر من:", options: ["سلبيات شبكات التواصل الاجتماعي", "الاتصال", "إيجابيات شبكات التواصل", "سلبيات العميل"], answer: "سلبيات شبكات التواصل الاجتماعي" },
             { category: "weekly", question: "التعرف على ثقافة وعادات الشعوب الأخرى:", options: ["إيجابيات شبكات التواصل الاجتماعي", "الاتصال", "سلبيات شبكات التواصل", "سلبيات العميل"], answer: "إيجابيات شبكات التواصل الاجتماعي" },
+            // Chapter 9
             { category: "weekly", question: "الحصول على دورات مجانية أو بأجور رمزية تعتبر من:", options: ["الآثار الإيجابية لاستخدام الإنترنت", "الآثار السلبية", "آثار التسويق", "الآثار الإنسانية"], answer: "الآثار الإيجابية لاستخدام الإنترنت" },
-            { category: "weekly", question: "تفشي ارتياد المواقع الإباحية تعتبر من:", options: ["الأضرار الأخلاقية", "الأضرار النفسية", "الأضرار العقائدية", "الإيجابيات"], answer: "الأضرار الأخلاقية" },
+            { category: "weekly", question: "تفشي ارتياد المواقع الإباحية تعتبر من ... نتيجة تصفح الإنترنت:", options: ["الأضرار الأخلاقية", "الأضرار النفسية", "الأضرار العقائدية", "الإيجابيات"], answer: "الأضرار الأخلاقية" },
+            { category: "weekly", question: "الإنفاق على استعمال الشبكة تعتبر من:", options: ["الأضرار الاقتصادية", "الأضرار الاجتماعية", "الأضرار النفسية", "الأضرار السياسية"], answer: "الأضرار الاقتصادية" },
             { category: "weekly", question: "كثرة التعرض والجلوس على الأنترنت لساعات طويلة تسبب:", options: ["الأضرار الصحية", "الأضرار الاجتماعية", "الأضرار النفسية", "الأضرار الاقتصادية"], answer: "الأضرار الصحية" },
             { category: "weekly", question: "عدم السيطرة أو التحكم في استخدام الإنترنت حيث يؤدي إلى القلق واضطرابات نفسية:", options: ["الإدمان", "الجلوس", "التأخر عن العمل", "الأمراض النفسية"], answer: "الإدمان" },
-            { category: "weekly", question: "تأثر العلاقات العائلية والاجتماعية أو العمل بسبب الانشغال بالإنترنت تعتبر من:", options: ["أعراض إدمان الإنترنت", "أعراض إدمان المنشطات", "أعراض إدمان القهوة", "أعراض إدمان التدخين"], answer: "أعراض إدمان الإنترنت" },
+            { category: "weekly", question: "تأثر العلاقات العائلية والاجتماعية بسبب الانشغال بالإنترنت تعتبر من:", options: ["أعراض إدمان الإنترنت", "أعراض إدمان المنشطات", "أعراض إدمان القهوة", "أعراض إدمان التدخين"], answer: "أعراض إدمان الإنترنت" },
+            // Chapter 10
             { category: "weekly", question: "مجموعة من المعتقدات والتصورات والافتراضات التي يكونها الفرد عن ذاته:", options: ["مفهوم الذات", "مفهوم الاتصال", "مفهوم السلوك", "الآثار الإنسانية"], answer: "مفهوم الذات" },
             { category: "weekly", question: "الحالة التي يفصح فيها الإنسان عن ما بداخله من مشاعر تجاه الأشياء والأحداث:", options: ["الحالة الإيجابية", "الأضرار الأخلاقية", "الحالة السلبية", "الحالة العقائدية"], answer: "الحالة الإيجابية" },
             { category: "weekly", question: "المنطقة التي تحوي معلومات لا نعرفها عن أنفسنا، ولكن ظاهرة للأشخاص الآخرين:", options: ["المنطقة العمياء", "المنطقة المكشوفة", "منطقة الاسرار", "المنطقة المجهولة"], answer: "المنطقة العمياء" },
-            { category: "weekly", question: "معرفة الحالات الداخلية للفرد ومشاعره ومعتقداته واستخدامها كدليل في اتخاذ القرار:", options: ["الوعي بالذات", "الوعي الأخلاقي", "الوعي السلوكي", "السلوك"], answer: "الوعي بالذات" },
+            { category: "weekly", question: "معرفة الحالات الداخلية للفرد ومشاعره واستخدامها كدليل في اتخاذ القرار:", options: ["الوعي بالذات", "الوعي الأخلاقي", "الوعي السلوكي", "السلوك"], answer: "الوعي بالذات" },
             { category: "weekly", question: "التعبير اللفظي وغير اللفظي عن الإحساس الحميم تجاه الأشخاص الذين نحترمهم:", options: ["الوجدان", "الاسترخاء", "الكلام", "الاستماع"], answer: "الوجدان" },
             { category: "weekly", question: "يحدث في هذه المرحلة اتفاق ضمني بين طرفي العلاقة حول واجبات ومسئوليات كل منهما:", options: ["الارتباط", "الانهاء", "التقييد", "الركود"], answer: "الارتباط" },
-            { category: "weekly", question: "القدرة على فهم مشاعر وأفكار الآخرين، والتعامل مع البيئة بنجاح والاستجابة بطريقة ذكية:", options: ["الذكاء الاجتماعي", "الذكاء العاطفي", "مفهوم الذات", "الآثار الإنسانية"], answer: "الذكاء الاجتماعي" },
+            // Chapter 11
+            { category: "weekly", question: "القدرة على فهم مشاعر وأفكار الآخرين، والتعامل مع البيئة بنجاح:", options: ["الذكاء الاجتماعي", "الذكاء العاطفي", "مفهوم الذات", "الآثار الإنسانية"], answer: "الذكاء الاجتماعي" },
             { category: "weekly", question: "تعتبر الذكاء الاجتماعي العالي مرادف لمفهوم:", options: ["اللباقة والبراعة", "الأضرار الأخلاقية", "الحالة السلبية", "الحالة الايجابية"], answer: "اللباقة والبراعة" },
             { category: "weekly", question: "يعتبر التعاطف مع الآخرين واحترام وجهات نظرتهم وتقديم النصح والإرشاد لهم من:", options: ["تنمية الذكاء الاجتماعي", "أهمية الذكاء الاجتماعي", "خصائص الذكاء الاجتماعي", "الآثار الإنسانية"], answer: "تنمية الذكاء الاجتماعي" },
             { category: "weekly", question: "يحب الانتماء للنوادي والتجمعات أو أي مجموعات منظمة تعتبر من:", options: ["صفات من يتمتع بالذكاء الاجتماعي", "أهمية الذكاء الاجتماعي", "تنمية الذكاء الاجتماعي", "الآثار الإنسانية"], answer: "صفات من يتمتع بالذكاء الاجتماعي" },
             { category: "weekly", question: "تصنف الأنماط البشرية وفقاً لنمط الإدراك إلى:", options: ["السمعي البصري الحسي", "السمعي الحسي الخلقي", "البصري الحسي الانساني", "الإنساني القويم"], answer: "السمعي البصري الحسي" },
             { category: "weekly", question: "يمتاز بأن لدية الإجابة عن كل سؤال:", options: ["مدعي المعرفة", "الثرثار", "العنيد", "الإيجابي"], answer: "مدعي المعرفة" },
+            // Chapter 12
             { category: "weekly", question: "اجتماع محدد يهدف إلى اختيار أفضل المرشحين للبحث عن من يستطيع القيام بأعمال وظيفة معينة:", options: ["المقابلات الشخصية", "الذكاء العاطفي", "مفهوم الذات", "الذكاء الاجتماعي"], answer: "المقابلات الشخصية" },
             { category: "weekly", question: "الاطلاع والتدريب على مواقع اختبارات القياس النفسي الأكثر استخداماً تعتبر من الإجراءات:", options: ["قبل المقابلة", "اثناء المقابلة", "اللباقة والبراعة", "بعد المقابلة"], answer: "قبل المقابلة" },
+            { category: "weekly", question: "سؤال: ما سبب اختيارك للعمل في هذه الشركة؟ الإجابة المناسبة:", options: ["اهتمام عالي بالتدريب", "لأن شركتكم لا تهتم بالغياب", "مرتب أعلى", "الذكاء الاجتماعي"], answer: "اهتمام عالي بالتدريب" },
+            { category: "weekly", question: "سؤال: ماهي نقاط القوة والضعف لديك؟ الإجابة المناسبة:", options: ["التحدث عن نقاط قوة أكثر من الضعف", "التحدث عن نقاط الضعف أكثر", "التحدث بسلبية عن الشركة السابقة", "الشركة السابقة سبب فشلك"], answer: "التحدث عن نقاط قوة أكثر من الضعف" },
             { category: "weekly", question: "من أفضل النصائح عند الإجابات في المقابلة الشخصية:", options: ["أعط نفسك ثانية أو ثانيتين قبل البدء", "عدم الرد", "البدء بالأشياء السلبية", "التسرع في الاجابة"], answer: "أعط نفسك ثانية أو ثانيتين قبل البدء" },
             { category: "weekly", question: "تعتبر من المهارات والقدرات الشخصية التي غالباً ما تسعى إليها وتبحث عنها القطاعات:", options: ["مهارات الاتصال", "الأضرار الأخلاقية", "الدورات الانسانية", "الطلب والعرض"], answer: "مهارات الاتصال" },
+            // Chapter 13
             { category: "weekly", question: "تعريف مختصر وواضح وجذاب للمرشح للوظيفة وتتضمن ملخص المؤهلات والخبرات:", options: ["السيرة الذاتية", "مفهوم الذات", "الذكاء الاجتماعي", "الآثار الإنسانية"], answer: "السيرة الذاتية" },
             { category: "weekly", question: "تعتبر تنظيم وترتيب الأفكار من:", options: ["خصائص السيرة الذاتية", "الأضرار الأخلاقية", "التعليم", "التقرير"], answer: "خصائص السيرة الذاتية" },
             { category: "weekly", question: "تلجأ الشركات إلى تصفية المتقدمين من خلال:", options: ["السيرة الذاتية", "مفهوم الذات", "الذكاء الانساني", "الطلب"], answer: "السيرة الذاتية" },
             { category: "weekly", question: "تعتبر اختيار العنوان الملائم للتقرير من ضمن:", options: ["الاستعدادات لكتابة التقارير", "الوظيفة", "اللباقة والبراعة", "الادارة"], answer: "الاستعدادات لكتابة التقارير" },
             { category: "weekly", question: "يعتبر (الهدف من التقرير) جزء من:", options: ["المقدمة", "القائمة", "الخاتمة", "الجداول والأشكال"], answer: "المقدمة" },
             { category: "weekly", question: "هي عبارة عن المعلومات التي تم استخلاصها من بيانات التقرير:", options: ["الاستنتاجات", "التوصيات", "الجداول والأشكال", "المقدمة"], answer: "الاستنتاجات" },
+            // Chapter 14
             { category: "weekly", question: "جهد يقوم بصفة أساسية على الرغبة والدافع الذاتي دون انتظار عائد مادي:", options: ["العمل التطوعي", "الذكاء العاطفي", "الذكاء الاجتماعي", "الآثار الانسانية"], answer: "العمل التطوعي" },
             { category: "weekly", question: "تعتمد المساهمة في الاعمال التطوعية ضمن:", options: ["الأهداف العامة والأسس الاستراتيجية", "الاضرار الاخلاقية", "اللباقة والبراعة", "الحالة الايجابية"], answer: "الأهداف العامة والأسس الاستراتيجية" },
             { category: "weekly", question: "تكوين الفريق تعتبر من:", options: ["خطوات لبناء مشروع تطوعي", "مفهوم الذات", "خطوات لبناء مشروع استثماري", "الآثار الانسانية"], answer: "خطوات لبناء مشروع تطوعي" },
@@ -433,7 +604,7 @@
             { category: "weekly", question: "جماعات تم إنشاؤها داخل المؤسسة لتحقيق هدف أو مهمة محددة تتطلب التنسيق:", options: ["فريق العمل", "مجموع العمل", "فريق المساواة", "الذكاء الاجتماعي"], answer: "فريق العمل" },
             { category: "weekly", question: "التحفظ في تبادل المعلومات تعتبر من:", options: ["معوقات فريق العمل", "الاضرار الاخلاقية", "اللباقة والبراعة", "الحالة الايجابية"], answer: "معوقات فريق العمل" },
 
-            // --- Exams 1443 ---
+            // --- Exams 1443 (35 Questions) ---
             { category: "exam1443", question: "أولى مراحل عملية التحدث:", options: ["الاستثارة", "النطق", "التفكير", "الصياغة"], answer: "الاستثارة" },
             { category: "exam1443", question: "إدراك واستيعاب المستقبل لمعنى الرسالة التي قام المرسل بتوصيلها:", options: ["التفسير", "الانتباه", "التذكر", "التقييم"], answer: "التفسير" },
             { category: "exam1443", question: "يمكن تعريفه على أنه العملية التي يتم من خلالها تبادل الأفكار بدون استخدام الكلمات:", options: ["الاتصال الغير اللفظي", "الاتصال اللفظي", "الاتصال الشفهي", "الاتصال المباشر"], answer: "الاتصال الغير اللفظي" },
@@ -442,12 +613,13 @@
             { category: "exam1443", question: "أحد معوقات الاتصال:", options: ["الرسالة تحمل معاني و أفكار مشوشة", "اشتمال الرسالة على عنصر التشويق", "الهدف من الاتصال واضح", "هدوء الأصوات"], answer: "الرسالة تحمل معاني و أفكار مشوشة" },
             { category: "exam1443", question: "أحد مراحل مهارة الالقاء الجيد:", options: ["التدريب المسبق", "الإدارة", "القائد", "الاتصال"], answer: "التدريب المسبق" },
             { category: "exam1443", question: "تأثر العلاقات العائلية والاجتماعية أو العمل بسبب الانشغال بالإنترنت يعتبر:", options: ["أعراض إدمان الانترنت", "أعراض إدمان المنشطات", "أعراض إدمان القهوة", "أعراض إدمان التدخين"], answer: "أعراض إدمان الانترنت" },
-            { category: "exam1443", question: "الحالة التي يفصح الانسان عن ما بداخله من مشاعر تجاه الأشياء والاحداث مما يجعله أكثر حيوية:", options: ["الحالة الموجبة", "الحالة السلبية", "الحالة التنقلية", "الحالة المتوازنة"], answer: "الحالة الموجبة" },
+            { category: "exam1443", question: "الحالة التي يفصح الانسان عن ما بداخله من مشاعر تجاه الأشياء والاحداث:", options: ["الحالة الموجبة", "الحالة السلبية", "الحالة التنقلية", "الحالة المتوازنة"], answer: "الحالة الموجبة" },
             { category: "exam1443", question: "عملية يقوم الفرد من خلالها بالتعبير ببعض المعلومات الشخصية لفرد ما دون غيره:", options: ["الإفصاح عن الذات", "الإفصاح الفوري", "الإفصاح عن الاسرار", "الكتمان"], answer: "الإفصاح عن الذات" },
             { category: "exam1443", question: "المنطقة التي تحوي معلومات معينة عن الفرد التي تكون ظاهرة للآخرين:", options: ["المنطقة المكشوفة", "المنطقة العمياء", "منطقة الأسرار", "المنطقة المجهولة"], answer: "المنطقة المكشوفة" },
             { category: "exam1443", question: "عبارة عن القدرة على فهم مشاعر وأفكار الآخرين والتعامل مع البيئة بنجاح:", options: ["الذكاء الاجتماعي", "الذكاء العاطفي", "مفهوم الذات", "الآثار الإنسانية"], answer: "الذكاء الاجتماعي" },
             { category: "exam1443", question: "الذكاء الاجتماعي العالي مرادف لمفهوم:", options: ["اللباقة والبراعة", "الاضرار الأخلاقية", "الحالة السلبية", "الحالة الإيجابية"], answer: "اللباقة والبراعة" },
             { category: "exam1443", question: "يعتبر التعاطف مع الآخرين، واحترام وجهات نظرتهم، وتقديم النصح والإرشاد لهم من:", options: ["تنمية الذكاء الاجتماعي", "أهمية الذكاء الاجتماعي", "خصائص الذكاء الاجتماعي", "الآثار الإنسانية"], answer: "تنمية الذكاء الاجتماعي" },
+            { category: "exam1443", question: "يحب الانتماء للنوادي والتجمعات تعتبر من:", options: ["تنمية الذكاء الاجتماعي", "أهمية الذكاء الاجتماعي", "صفات من يتمتع بالذكاء الاجتماعي", "الآثار الإنسانية"], answer: "تنمية الذكاء الاجتماعي" },
             { category: "exam1443", question: "فهم العالم من حولنا في عملية الاتصال من الأهداف:", options: ["المتعلقة بالجوانب الاجتماعية", "المتعلقة بالجوانب الاقتصادية", "المتعلقة بالاستجابة للحاجات", "المتعلقة بالحاجة إلى عدم الاقناع"], answer: "المتعلقة بالجوانب الاجتماعية" },
             { category: "exam1443", question: "الحفاظ على المؤسسات القائمة والمجتمعات في عملية الاتصال من الأهداف:", options: ["متعلقة بالجوانب الاجتماعية", "المتعلقة بالاستجابة للحاجات", "المتعلقة بالحاجة إلى عدم الاقناع", "المتعلقة بالحاجة الخوف"], answer: "متعلقة بالجوانب الاجتماعية" },
             { category: "exam1443", question: "الحاجة إلى الاقناع تعتبر من أهداف الاتصال المتعلقة بـ:", options: ["الاستجابة للحاجات الأساسية", "الجوانب الاجتماعية", "الجوانب السياسية", "الجوانب الاقتصادية"], answer: "الاستجابة للحاجات الأساسية" },
@@ -457,15 +629,19 @@
             { category: "exam1443", question: "حلقة الوصل بين المرسل والمستقبل والتي يتم من خلالها نقل الرسالة:", options: ["القناة أو الوسيلة", "المرسل", "الرسالة", "المستقبل"], answer: "القناة أو الوسيلة" },
             { category: "exam1443", question: "يقصد بها رد فعل المستقبل على الرسالة الاتصالية:", options: ["التغذية الراجعة", "المرسل", "الرسالة", "القناة أو الوسيلة"], answer: "التغذية الراجعة" },
             { category: "exam1443", question: "تعتبر أخر مرحلة من العرض ويجب أن تكون عبارة عن تلخيص لأهم أفكار العرض:", options: ["الخاتمة", "التعبير", "الاتساق", "المقدمة"], answer: "الخاتمة" },
+            { category: "exam1443", question: "الموضوع والمادة الخصبة التي يدور حولها اللقاء:", options: ["المحتوى", "الخاتمة", "التعبير", "المقدمة"], answer: "المحتوى" },
             { category: "exam1443", question: "تعتبر من المؤشرات الإيجابية التي تدل على تفاعل الجمهور مع مقدم العرض:", options: ["هزة الرأس الإيجابية", "التململ", "العبوس", "كثرة النظر إلى الساعة"], answer: "هزة الرأس الإيجابية" },
-            { category: "exam1443", question: "هو المفاوض الذي يتصرف بعدوانية تجاه الطرف الاخر ولا يهتم به:", options: ["المقاتل", "الواقعي", "الهجومي", "التحليلي"], answer: "المقاتل" },
+            { category: "exam1443", question: "عملية المباحثات التي تتم بين طرفين أو أكثر ينظر كل منهما للآخر على أنه متحكم في مصادر إشباعات الآخر:", options: ["التفاوض", "الرسالة", "الاقناع", "المرسل"], answer: "التفاوض" },
+            { category: "exam1443", question: "الاتفاق على أجندة المفاوضات وما تتضمنه من موضوعات يعتبر الخطوة:", options: ["الثالثة", "الأولى", "الثانية", "الرابعة"], answer: "الثالثة" },
+            { category: "exam1443", question: "مراعاة الشكل والمضمون من حيث جودة وصحة ودقة اختيار الألفاظ والتعبيرات يعتبر أحد نقاط:", options: ["الخطوة السادسة", "الخطوة الأولى", "الخطوة الثانية", "الخطوة الرابعة"], answer: "الخطوة السادسة" },
             { category: "exam1443", question: "هي القيادة التي تقوم على أساس إعطاء الأفراد الحرية المطلقة:", options: ["القيادة الحرة", "النمط الديموقراطي", "التسلطية", "البيروقراطية"], answer: "القيادة الحرة" },
             { category: "exam1443", question: "تعتبر أحد الخصائص المميزة للقادة:", options: ["التخطيط والتنظيم", "اتخاذ قرارات تعسفية", "يتجاهل التفويض", "لا يمتلك رؤية ثاقبة"], answer: "التخطيط والتنظيم" },
             { category: "exam1443", question: "الإنفاق على استعمال الشبكة تعتبر من:", options: ["الأضرار الاقتصادية", "الأضرار الاجتماعية", "الأضرار النفسية", "الأضرار السياسية"], answer: "الأضرار الاقتصادية" },
             { category: "exam1443", question: "كثرة التعرض والجلوس على الانترنت لساعات طويلة تسبب:", options: ["الأضرار الصحية", "الأضرار الاجتماعية", "الأضرار السياسية", "الأضرار الاقتصادية"], answer: "الأضرار الصحية" },
+            { category: "exam1443", question: "عدم السيطرة أو التحكم في استخدام الانترنت حيث يؤدي إلى القلق واضطرابات نفسية:", options: ["الإدمان", "الجلوس", "التأخر عن العمل", "الأمراض النفسية"], answer: "الإدمان" },
             { category: "exam1443", question: "اجتماع محدد يهدف إلى اختيار أفضل المرشحين للبحث عن من يستطيع القيام بأعمال وظيفة معينة:", options: ["المقابلات الشخصية", "الذكاء العاطفي", "مفهوم الذات", "الذكاء الاجتماعي"], answer: "المقابلات الشخصية" },
 
-            // --- Exams 1444 ---
+            // --- Exams 1444 (50 Questions) ---
             { category: "exam1444", question: "إلقاء عضو هيئة التدريس للمحاضرة على مجموعه من الطلاب يعتبر:", options: ["اتصال جمعي", "اتصال ذاتي", "اتصال جماهيري", "اتصال شخصي"], answer: "اتصال جمعي" },
             { category: "exam1444", question: "الكتب والمجلات والصحف والنشرات تعتبر من:", options: ["وسائل الاتصال التقليدية", "وسائل الاتصال الرقمي", "وسائل الاتصال السحابي", "وسائل الاتصال الداخلي"], answer: "وسائل الاتصال التقليدية" },
             { category: "exam1444", question: "هو ذلك الاتصال الذي يعي فيه المتصل إختلاف العادات والقيم والأعراف:", options: ["الاتصال الثقافي", "الاتصال الجمعي", "الاتصال الجماهيري", "الاتصال الشخصي"], answer: "الاتصال الثقافي" },
@@ -478,60 +654,107 @@
             { category: "exam1444", question: "الحرص على قراءة الموضوع أكثر من مرة لزيادة الإتقان والجودة تتبع:", options: ["مرحلة التدريب المسبق", "مرحلة ما بعد الإلقاء", "خلال مرحلة الإلقاء", "مرحلة التناغم"], answer: "مرحلة التدريب المسبق" },
             { category: "exam1444", question: "هي تلك المهارات المتعلقة بفنيات العرض وعناصره وما يحتويه من بيانات ومعلومات:", options: ["مهارات العروض الفنية", "مهارات العروض السلوكية", "مهارات كسر الجمود", "مهارات الفنون المسرحية"], answer: "مهارات العروض الفنية" },
             { category: "exam1444", question: "تعتبر أحد أهم الصفات التي يجب أن يلم بها الشخص الملقي:", options: ["المهارة اللغوية", "التلعثم", "كثرة الكلام", "عدم الصدق"], answer: "المهارة اللغوية" },
+            { category: "exam1444", question: "أحد مراحل مهارة الإلقاء الجيد:", options: ["التدريب المسبق", "الإدارة", "القائد", "الاتصال"], answer: "التدريب المسبق" },
             { category: "exam1444", question: "الحضور للمكان المخصص مبكراً تعتبر من الاشياء التي تساعد على التخلص من:", options: ["الخوف", "الحضور", "الأفراد", "النوم"], answer: "الخوف" },
+            { category: "exam1444", question: "التوقف قبل وبعد كل جملة مهمة، لأن الوقفات أهم من:", options: ["الكلام نفسه", "القيادة", "الاستماع", "الاتصال"], answer: "الكلام نفسه" },
             { category: "exam1444", question: "هي تلك المهارة التي من خلالها يستطيع الفرد جذب انتباه الحضور بصفة مستمرة:", options: ["مهارات كسر الجمود", "مهارات العروض السلوكية", "مهارات العروض الفنية", "مهارات الفنون المسرحية"], answer: "مهارات كسر الجمود" },
             { category: "exam1444", question: "تعتبر من المؤشرات السلبية التي تدل على عدم تفاعل الجمهور مع مقدم العرض:", options: ["التثاؤب والنعاس", "هزات الرأس الإيجابية", "كتابة النقاط", "ميل الجسد للأمام"], answer: "التثاؤب والنعاس" },
             { category: "exam1444", question: "هو عملية تحدث بين طرفين ، حيث يتم من خلالها تبادل الأفكار والمشاعر:", options: ["الحوار", "القناعة", "الإعلان", "الإنصات"], answer: "الحوار" },
             { category: "exam1444", question: "يعتبر من مستويات الحوار وهو الحوار الذي يتم مع الفرد وذاته:", options: ["الحوار الداخلي", "الحوار الأفقي", "الحوار الجماعي", "الحوار الإداري"], answer: "الحوار الداخلي" },
             { category: "exam1444", question: "تعتبر من صفات المحاور الناجح:", options: ["عدم الانشغال مع الغير", "عدم الابتسامة", "عدم الوضوح", "لا يجيد الإنصات"], answer: "عدم الانشغال مع الغير" },
             { category: "exam1444", question: "استراتيجية (المدح) تعتبر من:", options: ["التعزيزات الإيجابية", "التعزيزات السلبية", "المقايضة", "التقديم الأولي"], answer: "التعزيزات الإيجابية" },
+            { category: "exam1444", question: "استخدام الكلمات أو المواقف الإيجابية لتدعيم سلوك الفرد:", options: ["استراتيجية التعزيز الايجابي", "استراتيجية العواقب السلبي", "استراتيجية التعزيز الديموقراطي", "هدوء الأصوات"], answer: "استراتيجية التعزيز الايجابي" },
+            { category: "exam1444", question: "الاتفاق على أجندة المفاوضات يعتبر الخطوة:", options: ["الثالثة", "الأولى", "الثانية", "الرابعة"], answer: "الثالثة" },
+            { category: "exam1444", question: "مراعاة الشكل والمضمون من حيث جودة اختيار الالفاظ يعتبر أحد نقاط:", options: ["الخطوة السادسة", "الخطوة الأولى", "الخطوة الثانية", "الخطوة الرابعة"], answer: "الخطوة السادسة" },
             { category: "exam1444", question: "هو المفاوض الذي يتميز بإعطاء اهتمام بالوقت ، ويريد الدخول في صلب الموضوع مباشرة:", options: ["المفاوض الواقعي", "المفاوض المقاتل", "المفاوض المتعاون", "المفاوض التحليلي"], answer: "المفاوض الواقعي" },
             { category: "exam1444", question: "هو المفاوض الذي لا يقتنع أبداً بأي عرض إلا بعد ان يعرف كل التفاصيل الدقيقة:", options: ["المفاوض التحليلي", "المفاوض المقاتل", "المفاوض الواقعي", "المفاوض المتعاون"], answer: "المفاوض التحليلي" },
             { category: "exam1444", question: "الولاء للجماعة بأكملها وليس لفرد بذاته يعتبر من مرتكزات:", options: ["النمط الديموقراطي", "الدكتاتورية", "الحرة", "التحويلية"], answer: "النمط الديموقراطي" },
             { category: "exam1444", question: "هو النمط الذي يخول فيه كل فرد سلطة كاملة لكي ينجز عمله بالطريقة التي يراها مناسبة:", options: ["نمط القيادة الحرة", "الديموقراطي", "الدكتاتورية", "التحويلية"], answer: "نمط القيادة الحرة" },
+            { category: "exam1444", question: "يستخدم في نقل الرسائل الصوتية بين المرسل والمستقبل على نطاق واسع في قطاع الأعمال:", options: ["الهاتف الثابت", "الجوال", "الهاتف المرئي", "المستقبل"], answer: "الهاتف الثابت" },
+            { category: "exam1444", question: "كثرة التعرض والجلوس على الأنترنت لساعات طويلة تسبب:", options: ["الأضرار الصحية", "الأضرار الاجتماعية", "الأضرار النفسية", "الأضرار الاقتصادية"], answer: "الأضرار الصحية" },
             { category: "exam1444", question: "هي تلك المنطقة التي تحوي معلومات لا نعرفها عن أنفسنا ولكن ظاهرة للأشخاص الآخرين:", options: ["المنطقة العمياء", "المنطقة المكشوفة", "منطقة الأسرار", "المنطقة المجهولة"], answer: "المنطقة العمياء" },
             { category: "exam1444", question: "المنطقة التي تحوي معلومات غير معروفة من الجميع وتمثل جميع أبعاد شخصياتنا:", options: ["المنطقة المجهولة", "المنطقة العمياء", "المنطقة المكشوفة", "منطقة الأسرار"], answer: "المنطقة المجهولة" },
+            { category: "exam1444", question: "هو القدرة على فهم مشاعر و أفكار الآخرين، والتعامل مع البيئة بنجاح:", options: ["الذكاء الاجتماعي", "الذكاء العاطفي", "مفهوم الذات", "الذكاء الأخلاقي"], answer: "الذكاء الاجتماعي" },
+            { category: "exam1444", question: "هي إحدى الوسائل الأساسية التي تعتمد عليها الشركات لاختيار كوادرها الوظيفية:", options: ["المقابلات الشخصية", "المقابلات العائلية", "المقابلات الفردية", "المقابلات الاجتماعية"], answer: "المقابلات الشخصية" },
+            { category: "exam1444", question: "هي عبارة عن تعريف مختصر وواضح وجذاب للمرشح للوظيفة:", options: ["السيرة الذاتية", "مفهوم الذات", "الذكاء الاجتماعي", "الآثار النفسية"], answer: "السيرة الذاتية" },
             { category: "exam1444", question: "تلجأ الشركات الى تصفية المتقدمين من خلال:", options: ["السيرة الذاتية", "مفهوم الذات", "الذكاء الانساني", "الطلب"], answer: "السيرة الذاتية" },
+            { category: "exam1444", question: "جهد يقوم بصفة أساسية على الرغبة والدافع الذاتي دون انتظار عائد مادي:", options: ["العمل التطوعي", "العمل الجماعي", "العمل الإجباري", "العمل الفردي"], answer: "العمل التطوعي" },
             { category: "exam1444", question: "هو سلوك متطور، أكثر استقراراً وتحقيقاً للأهداف من العمل الفردي:", options: ["العمل التطوعي المؤسسي", "العمل التطوعي الفردي", "العمل التطور الجماعي", "العمل الاجتماعي"], answer: "العمل التطوعي المؤسسي" },
+            { category: "exam1444", question: "تكوين الفريق تعتبر من:", options: ["خطوات لبناء مشروع تطوعي", "مفهوم الذات", "خطوات لبناء مشروع إستثماري", "الآثار الإنسانية"], answer: "خطوات لبناء مشروع تطوعي" },
+            { category: "exam1444", question: "جماعات تم إنشاؤها داخل المؤسسة لتحقيق هدف أو مهمة محددة:", options: ["فريق العمل", "مجموع العمل", "فريق المساواة", "الذكاء الاجتماعي"], answer: "فريق العمل" },
+            { category: "exam1444", question: "عملية يتم من خلالها تبادل الأفكار والمعلومات والأحاسيس والمشاعر من فرد إلى آخر:", options: ["الاتصال", "التخطيط", "الإدارة", "المجال"], answer: "الاتصال" },
             { category: "exam1444", question: "مفهوم 'الحاجة إلى الإقناع' تعتبر من أهداف الاتصال المتعلقة بـ:", options: ["الاستجابة للحاجات الاساسية", "الجوانب الاجتماعية", "الجوانب السياسية", "الجوانب الاقتصادية"], answer: "الاستجابة للحاجات الاساسية" },
             { category: "exam1444", question: "هو الطرف الذي يقوم بإنشاء الرسالة ويرغب في التأثير على الآخر:", options: ["المرسل", "الرسالة", "المستقبل", "الوسيلة"], answer: "المرسل" },
             { category: "exam1444", question: "هي العملية التي يقصد بها إتخاذ الإجراء المطلوب من الرسالة والذي يقصده المرسل:", options: ["الإستجابة للرسالة", "الإرسال", "الاتصال الفردي", "الإستجابة المتقطعة"], answer: "الإستجابة للرسالة" },
+            { category: "exam1444", question: "تأخذ صوراً عديدة منها (الكلمات والرموز والإيماءات وحركات الجسم):", options: ["الرسالة", "الأموال", "العلامة التجارية", "الموضوع"], answer: "الرسالة" },
+            { category: "exam1444", question: "الأجهزة الذكية والاذاعة والتلفاز والانترنت تعتبر من:", options: ["وسائل الاتصال الالكترونية", "وسائل الاتصال السحابي", "وسائل الاتصال التقليدية", "وسائل الاتصال الداخلي"], answer: "وسائل الاتصال الالكترونية" },
+            { category: "exam1444", question: "حلقة الوصل بين المرسل والمستقبل والتي يتم من خلالها نقل الرسالة:", options: ["قناة الاتصال", "الرسالة", "العلاقات العامة", "الإدارة"], answer: "قناة الاتصال" },
             { category: "exam1444", question: "تعرف بأنها عملية آنية تتم من خلال إرسال المستقبل إستجابات لجعل المرسل يعرف أثر رسالته:", options: ["التغذية الراجعة", "المرسل", "الرسالة", "المستقبل"], answer: "التغذية الراجعة" },
+            { category: "exam1444", question: "تعبر عن الجو العام المتمثل في المحيط النفسي والمادي الذي يحدث فيه عملية الاتصال:", options: ["بيئة الاتصال", "الإدارة", "المستقبل", "التغذية الراجعة"], answer: "بيئة الاتصال" },
             { category: "exam1444", question: "هو ذلك الاتصال الذي يمكن أن نستخدم فيه الحواس الخمس أثناء عملية التواصل:", options: ["الاتصال الشخصي", "الاتصال الذاتي", "الاتصال الجمعي", "الاتصال الجماهيري"], answer: "الاتصال الشخصي" },
 
-            // --- Exams 1445 ---
+            // --- Exams 1445 (50 Questions) ---
             { category: "exam1445", question: "الاتصال الذي يتم بين أفراد لا ينتمون إلى ثقافة واحدة بل من ثقافات مختلفة:", options: ["الإتصال الثقافي", "الإتصال الجمعي", "الإتصال الجماهيري", "الإتصال الشخصي"], answer: "الإتصال الثقافي" },
             { category: "exam1445", question: "هي مهارة التعرف على الكلمات والحروف وتحويلها إلى معاني ومدركات:", options: ["مهارة القراءة", "مهارة الاستماع", "مهارة الاتصال الشفهي", "مهارة الانصات"], answer: "مهارة القراءة" },
             { category: "exam1445", question: "القدرة على الاستخدام الجيد للغة أثناء عملية الاتصال بالإضافة إلى الالقاء الجيد لها:", options: ["مهارة التحدث", "مهارة الاستماع", "مهارة الكتابة", "مهارة القراءة"], answer: "مهارة التحدث" },
             { category: "exam1445", question: "أحد مقومات الاتصال الشفهي والتي تساعد في نجاح عملية الاتصال:", options: ["الرغبة الشخصية", "عدم التكرار", "عدم وضوح الصوت", "التغذية الصحية"], answer: "الرغبة الشخصية" },
             { category: "exam1445", question: "هي عبارة عن عملية توظيف المهارات اللفظية واللغوية والصوتية ومهارات الفصاحة:", options: ["التحدث", "الإدارة", "المستقبل", "التغذية الراجعة"], answer: "التحدث" },
             { category: "exam1445", question: "من العناصر الأساسية التي تتعلق بالمهارات الشخصية لدى الشخص المتحدث:", options: ["صحة التعبير", "التأتأة", "عدم الوضوح", "سلامة المنتجات"], answer: "صحة التعبير" },
+            { category: "exam1445", question: "الحضور للمكان المخصص مبكراً تعتبر من الأشياء التي تساعد على التخلص من:", options: ["الخوف", "الحضور", "الأفراد", "النوم"], answer: "الخوف" },
+            { category: "exam1445", question: "التوقف قبل وبعد كل جملة مهمة لأن الوقفات أهم من:", options: ["الكلام نفسه", "القيادة", "الاستماع", "الاتصال"], answer: "الكلام نفسه" },
+            { category: "exam1445", question: "تعتبر أخر مرحلة من العرض ويجب أن تكون عبارة عن تلخيص لأهم أفكار العرض:", options: ["الخاتمة", "التعبير", "الاتساق", "المقدمة"], answer: "الخاتمة" },
+            { category: "exam1445", question: "هو عبارة عن الموضوع والمادة الخصبة التي يدور حولها اللقاء:", options: ["المحتوى", "التعبير", "الخاتمة", "المقدمة"], answer: "المحتوى" },
             { category: "exam1445", question: "المرحلة التي تبدأ فيها فعاليات العرض:", options: ["مرحلة العرض نفسه", "مرحلة ما قبل العرض", "مرحلة الإستعداد", "مرحلة ما بعد العرض"], answer: "مرحلة العرض نفسه" },
             { category: "exam1445", question: "المرحلة التي تقرر فيها إنهاء فعاليات العرض:", options: ["مرحلة نهاية العرض", "مرحلة ما قبل للعرض", "مرحلة ما بعد العرض", "مرحلة العرض ذاته"], answer: "مرحلة نهاية العرض" },
             { category: "exam1445", question: "أحد المؤشرات الإيجابية التي تدل على تفاعل الجمهور مع مقدم العرض:", options: ["هز الرأس الإيجابي", "عدم هز الرأس", "الشعور بالنوم", "عدم التفاعل"], answer: "هز الرأس الإيجابي" },
             { category: "exam1445", question: "من المؤشرات السلبية التي تدل على عدم تفاعل الجمهور مع مقدم العرض:", options: ["العبوس في الوجه", "هزات الرأس الإيجابية", "كتابة النقاط", "ميل الجسد للأمام"], answer: "العبوس في الوجه" },
             { category: "exam1445", question: "أحد أساليب كسر الجمود أثناء العرض:", options: ["استخدام الفكاهة", "مرحلة ما قبل العرض", "مرحلة ما بعد العرض", "الحضور"], answer: "استخدام الفكاهة" },
             { category: "exam1445", question: "طريقة لتقديم وعرض المعلومات والبيانات ونتائج الأبحاث:", options: ["العروض التقديمية", "العروض المستقبلية", "عروض الأزياء", "الحضور"], answer: "العروض التقديمية" },
+            { category: "exam1445", question: "نوع من الحديث بين شخصين يتم فيه تداول الكلام بينهما بطريقة ما:", options: ["الحوار", "الرسالة", "المرسل", "الهدف"], answer: "الحوار" },
+            { category: "exam1445", question: "الحوار الذي يتم بين الأفراد المتشابهين أو المتقاربين في الصفات بهدف تبادل الأفكار:", options: ["الحوار مع الناس", "الحوار مع النفس", "الحوار الذاتي", "التعبير"], answer: "الحوار مع الناس" },
+            { category: "exam1445", question: "الحوار الذي يتم مع الفرد وذاته، حيث يكون الفرد في عملية مصارحة مع الذات:", options: ["الحوار الداخلي", "الحوار الرأسي", "الحوار مع الناس", "الحوار الجماعي"], answer: "الحوار الداخلي" },
             { category: "exam1445", question: "استخدام الكلمات الإيجابية وعبارات الثناء الحسن مع الفرد المراد إقناعه:", options: ["المدح", "المقايضة", "الحوافز", "التقدير اللفظي"], answer: "المدح" },
+            { category: "exam1445", question: "هو عبارة عن استخدام الكلمات أو المواقف الإيجابية لتدعيم سلوك الفرد:", options: ["استراتيجية التعزيز الإيجابي", "استراتيجية العواقب السلبي", "استراتيجية التعزيز الديموقراطي", "هدوء الأصوات"], answer: "استراتيجية التعزيز الإيجابي" },
+            { category: "exam1445", question: "إيقاف المكافأة تعتبر من:", options: ["استراتيجية العواقب السلبية", "استراتيجية التعزيز الإيجابي", "استراتيجية التعزيز الديموقراطي", "الاتصال"], answer: "استراتيجية العواقب السلبية" },
+            { category: "exam1445", question: "عملية المباحثات التي تتم بين طرفين أو أكثر ينظر كل منهما للآخر على أنه متحكم في مصادر إشباعات الآخر:", options: ["التفاوض", "الرسالة", "الاقناع", "المرسل"], answer: "التفاوض" },
+            { category: "exam1445", question: "تعتبر من خصائص عملية التفاوض:", options: ["القضية التفاوضية", "الموقف التفاوضي", "القضية الأخلاقية", "عملية تتأثر بشخصية المفاوضين"], answer: "القضية التفاوضية" },
+            { category: "exam1445", question: "هو المفاوض الذي يتميز بإعطاء اهتمام بالوقت ، ويريد الدخول في صلب الموضوع مباشرة:", options: ["المفاوض الواقعي", "المفاوض المقاتل", "المفاوض المتعاون", "المفاوض التحليلي"], answer: "المفاوض الواقعي" },
+            { category: "exam1445", question: "هو المفاوض الذي يتصرف بعدوانية تجاه الطرف الآخر ولا يهتم به أو باحتياجاته:", options: ["المفاوض المقاتل", "المفاوض الهجومي", "المفاوض التحليلي", "المفاوض الواقعي"], answer: "المفاوض المقاتل" },
             { category: "exam1445", question: "هو المفاوض الذي لا يقتنع أبداً بأي عرض إلا بعد ان يعرف كل التفاصيل الدقيقة:", options: ["المفاوض التحليلي", "المفاوض المقاتل", "المفاوض الواقعي", "المفاوض المتعاون"], answer: "المفاوض التحليلي" },
-            { category: "exam1445", question: "نتيجة قضاء ساعات طويلة على الأنترنت قد يؤدي إلى:", options: ["الأضرار الصحية", "الأضرار الاجتماعية", "الأضرار السياسية", "الأضرار الاقتصادية"], answer: "الأضرار الصحية" },
+            { category: "exam1445", question: "نتيجة قضاء ساعات طويلة على الأنترنت قد يؤدي إلى:", options: ["الأضرار الاقتصادية", "الأضرار الاجتماعية", "الأضرار السياسية", "الأضرار الصحية"], answer: "الأضرار الاقتصادية" },
             { category: "exam1445", question: "استخدام الانترنت بشكل مفرط يؤدي إلى:", options: ["الإدمان", "الجلوس", "بطء الإنجاز", "الأمراض النفسية"], answer: "الإدمان" },
             { category: "exam1445", question: "تضييع فرص الترقي الوظيفي بسبب الانشغال بالإنترنت تعتبر من:", options: ["أعراض إدمان الانترنت", "أعراض إدمان المنشطات", "أعراض إدمان القهوة", "أعراض إدمان التدخين"], answer: "أعراض إدمان الانترنت" },
+            { category: "exam1445", question: "الحالة التي يفصح فيها الانسان عن ما بداخله من مشاعر تجاه الأشياء والأحداث:", options: ["الحالة الموجبة", "الحالة السلبية", "الخالة العقائدية", "الأضرار الأخلاقية"], answer: "الحالة الموجبة" },
             { category: "exam1445", question: "عملية يقوم الفرد من خلالها بالتعبير ببعض المعلومات الشخصية لفرد ما دون غيره:", options: ["الإفصاح عن الذات", "الإفصاح الفوري", "الإفصاح عن الاسرار", "الكتمان"], answer: "الإفصاح عن الذات" },
             { category: "exam1445", question: "المنطقة التي تحوي معلومات معينة عن الفرد التي تكون ظاهرة للآخرين:", options: ["المنطقة المكشوفة", "المنطقة العمياء", "المنطقة المجهولة", "منطقة الاسرار"], answer: "المنطقة المكشوفة" },
+            { category: "exam1445", question: "عبارة عن القدرة على فهم مشاعر و أفكار الآخرين والتعامل مع البيئة بنجاح:", options: ["الذكاء الاجتماعي", "مفهوم الذات", "الذكاء العاطفي", "الآثار الإنسانية"], answer: "الذكاء الاجتماعي" },
+            { category: "exam1445", question: "يعتبر الذكاء الاجتماعي العالي مرادف لمفهوم:", options: ["اللباقة والبراعة", "الأضرار الأخلاقية", "الحالة السلبية", "الحالة الإيجابية"], answer: "اللباقة والبراعة" },
+            { category: "exam1445", question: "يعتبر التعاطف مع الآخرين واحترام وجهات نظرتهم وتقديم النصح والإرشاد لهم من:", options: ["تنمية الذكاء الاجتماعي", "أهمية الذكاء الاجتماعي", "خصائص الذكاء الاجتماعي", "الآثار الإنسانية"], answer: "تنمية الذكاء الاجتماعي" },
             { category: "exam1445", question: "صفة ( الانتماء للنوادي والتجمعات ) من صفات:", options: ["الذكاء الاجتماعي", "الفطرية", "الذكاء الصناعي", "الذكاء الإنساني"], answer: "الذكاء الاجتماعي" },
+            { category: "exam1445", question: "اجتماع محدد يهدف إلى اختيار أفضل المرشحين للبحث عن من يستطيع القيام بأعمال وظيفة معينة:", options: ["المقابلات الشخصية", "الذكاء العاطفي", "مفهوم الذات", "الذكاء الاجتماعي"], answer: "المقابلات الشخصية" },
             { category: "exam1445", question: "من الأسس التي يجب مراعاتها عند الاتصال الهاتفي:", options: ["عدم الاتصال أثناء القيادة", "تضييع الوقت", "الحديث خارج الموضوع", "الإسهاب في الحديث"], answer: "عدم الاتصال أثناء القيادة" },
+            { category: "exam1445", question: "الإصابة بالأمراض النفسية تعتبر من:", options: ["سلبيات شبكات التواصل الاجتماعي", "الاتصال", "إيجابيات شبكات التواصل", "سلبيات العميل"], answer: "سلبيات شبكات التواصل الاجتماعي" },
             { category: "exam1445", question: "هو عملية تفاعلية تبادلية بين شخصين لإيصال رسالة ما عبر وسيلة محددة:", options: ["الاتصال", "المكان", "الإدارة", "المجال"], answer: "الاتصال" },
+            { category: "exam1445", question: "قال تعالى: (ادْفَعْ بِالَّتِي هِيَ أَحْسَنُ) تدل على:", options: ["حسن الإنصات والرد الحسن", "نبرات الصوت", "قول المعروف", "البدء بالتحية"], answer: "حسن الإنصات والرد الحسن" },
+            { category: "exam1445", question: "قال تعالى: (قَوْلَ مَعْرُوفٌ وَمَغْفِرَةٌ خَيْرٌ مِنْ صَدَقَةٍ يَتْبَعُهَا أَذًى) تدل على:", options: ["قول المعروف والكلام الطيب", "نبرات الصوت", "حسن الإنصات", "البدء بالتحية"], answer: "قول المعروف والكلام الطيب" },
+            { category: "exam1445", question: "الحاجة إلى الإقناع تعتبر من أهداف الاتصال المتعلقة بـ:", options: ["الاستجابة للحاجات الأساسية", "الجوانب الاجتماعية", "الجوانب السياسية", "الجوانب الاقتصادية"], answer: "الاستجابة للحاجات الأساسية" },
+            { category: "exam1445", question: "تعتبر عملية الاتصال عملية:", options: ["مستمرة ودائرية", "متقطعة ودائرية", "مستقبلية ومتقطعة", "غير مفهومة"], answer: "مستمرة ودائرية" },
+            { category: "exam1445", question: "أحد المهام أو الوظائف التي يقوم بها المستقبل:", options: ["فك ترميز الرسالة", "إرسال الرسالة", "المحور الرئيسي", "عدم الاستجابة للرسالة"], answer: "فك ترميز الرسالة" },
+            { category: "exam1445", question: "محور عملية الاتصال:", options: ["الرسالة", "المرسل", "الانصات", "المستقبل"], answer: "الرسالة" },
+            { category: "exam1445", question: "تعرف بأنها عملية آنية تتم من خلال إرسال المستقبل إستجابات لجعل المرسل يعرف أثر رسالته:", options: ["التغذية الراجعة", "المرسل", "الرسالة", "المستقبل"], answer: "التغذية الراجعة" },
             { category: "exam1445", question: "أحد أكثر أنواع الاتصال استخداماً في حياتنا اليومية:", options: ["الاتصال الشخصي", "الاتصال الذاتي", "الاتصال الجمعي", "الاتصال الجماهيري"], answer: "الاتصال الشخصي" },
             { category: "exam1445", question: "الاتصال الذي يكون بين مجموعة من الأفراد أو الأصدقاء بحيث يكون حجمها العددي كبير:", options: ["الاتصال الجمعي", "الاتصال الثقافي", "الاتصال الجماهيري", "الاتصال الشخصي"], answer: "الاتصال الجمعي" }
         ];
 
-        // --- Game Logic ---
+        // --- Global State ---
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let score = 0;
         let wrongAnswersLog = [];
+        let timerInterval;
+        let isSimulation = false;
 
+        // --- DOM Elements ---
         const startScreen = document.getElementById('start-screen');
         const quizScreen = document.getElementById('quiz-screen');
         const resultScreen = document.getElementById('result-screen');
@@ -541,12 +764,67 @@
         const nextBtn = document.getElementById('next-btn');
         const progressText = document.getElementById('progress-text');
         const scoreLive = document.getElementById('score-live');
+        const timerDisplay = document.getElementById('timer-display');
+        const searchInput = document.getElementById('search-input');
+        const resumeBtn = document.getElementById('resume-btn');
+        const savedQNum = document.getElementById('saved-q-num');
 
-        function startQuiz(category) {
-            if (category === 'all') {
+        // --- Init ---
+        // Check for saved progress on load
+        window.onload = function() {
+            if (localStorage.getItem('quizProgress')) {
+                const savedData = JSON.parse(localStorage.getItem('quizProgress'));
+                if (savedData.index < savedData.total && savedData.questions.length > 0) {
+                    savedQNum.innerText = savedData.index + 1;
+                    resumeBtn.style.display = 'block';
+                }
+            }
+        };
+
+        // --- Search Functionality ---
+        searchInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const searchTerm = searchInput.value.trim();
+                if (searchTerm.length < 2) {
+                    alert("الرجاء إدخال حرفين على الأقل للبحث");
+                    return;
+                }
+                startQuiz('search', searchTerm);
+            }
+        });
+
+        // --- Main Quiz Logic ---
+        function startQuiz(mode, searchTerm = '') {
+            isSimulation = false;
+            clearInterval(timerInterval);
+            timerDisplay.style.display = 'none';
+
+            if (mode === 'all') {
                 currentQuestions = [...quizData];
-            } else {
-                currentQuestions = quizData.filter(q => q.category === category);
+                // Shuffle for all
+                currentQuestions.sort(() => Math.random() - 0.5);
+            } 
+            else if (mode === 'simulation') {
+                isSimulation = true;
+                // Random 50 questions
+                const shuffled = [...quizData].sort(() => Math.random() - 0.5);
+                currentQuestions = shuffled.slice(0, 50);
+                timerDisplay.style.display = 'flex';
+                startTimer(60 * 60); // 60 minutes
+            }
+            else if (mode === 'search') {
+                currentQuestions = quizData.filter(q => 
+                    q.question.includes(searchTerm) || 
+                    q.options.some(opt => opt.includes(searchTerm))
+                );
+                if (currentQuestions.length === 0) {
+                    alert("لم يتم العثور على أسئلة مطابقة للبحث.");
+                    return;
+                }
+            }
+            else {
+                currentQuestions = quizData.filter(q => q.category === mode);
+                currentQuestions.sort(() => Math.random() - 0.5);
             }
 
             if (currentQuestions.length === 0) {
@@ -554,18 +832,37 @@
                 return;
             }
 
-            // Shuffle questions
-            currentQuestions.sort(() => Math.random() - 0.5);
-            
+            // Reset state
             currentQuestionIndex = 0;
             score = 0;
             wrongAnswersLog = [];
             
+            // Switch Screens
             startScreen.classList.remove('active');
             resultScreen.classList.remove('active');
             reviewScreen.classList.remove('active');
             quizScreen.classList.add('active');
             
+            showQuestion();
+        }
+
+        function resumeQuiz() {
+            const savedData = JSON.parse(localStorage.getItem('quizProgress'));
+            currentQuestions = savedData.questions;
+            currentQuestionIndex = savedData.index;
+            score = savedData.score;
+            wrongAnswersLog = savedData.wrongLog;
+            isSimulation = savedData.isSimulation || false;
+
+            if(isSimulation) {
+                timerDisplay.style.display = 'flex';
+                // Resume timer roughly or restart (simplification: restart timer or calc diff)
+                // For simplicity in this version, we restart a 60min timer if sim
+                startTimer(60 * 60); 
+            }
+
+            startScreen.classList.remove('active');
+            quizScreen.classList.add('active');
             showQuestion();
         }
 
@@ -577,6 +874,8 @@
             scoreLive.innerText = `النتيجة: ${score}`;
 
             // Shuffle options
+            // Note: If you want consistent option order on resume, store shuffled options in state.
+            // For now, re-shuffling options on render is acceptable.
             const shuffledOptions = [...question.options].sort(() => Math.random() - 0.5);
 
             shuffledOptions.forEach(option => {
@@ -587,6 +886,26 @@
                 button.addEventListener('click', selectAnswer);
                 optionsContainer.appendChild(button);
             });
+
+            // Save Progress
+            saveProgress();
+        }
+
+        function saveProgress() {
+            const data = {
+                questions: currentQuestions,
+                index: currentQuestionIndex,
+                total: currentQuestions.length,
+                score: score,
+                wrongLog: wrongAnswersLog,
+                isSimulation: isSimulation
+            };
+            localStorage.setItem('quizProgress', JSON.stringify(data));
+        }
+
+        function clearProgress() {
+            localStorage.removeItem('quizProgress');
+            resumeBtn.style.display = 'none';
         }
 
         function resetState() {
@@ -598,10 +917,12 @@
             const selectedBtn = e.target;
             const isCorrect = selectedBtn.dataset.correct === "true";
             
+            // Disable all buttons
             Array.from(optionsContainer.children).forEach(button => {
                 button.disabled = true;
                 if (button.dataset.correct === "true") {
                     button.classList.add('correct');
+                    button.innerHTML += ' ✅';
                 }
             });
 
@@ -611,14 +932,16 @@
                 scoreLive.innerText = `النتيجة: ${score}`;
             } else {
                 selectedBtn.classList.add('wrong');
+                selectedBtn.innerHTML += ' ❌';
                 wrongAnswersLog.push({
                     question: currentQuestions[currentQuestionIndex].question,
-                    selected: selectedBtn.innerText,
+                    selected: selectedBtn.innerText.replace(' ❌', ''),
                     correct: currentQuestions[currentQuestionIndex].answer
                 });
             }
 
             nextBtn.style.display = 'block';
+            saveProgress(); // Save updated score
         }
 
         nextBtn.addEventListener('click', () => {
@@ -626,27 +949,51 @@
             if (currentQuestionIndex < currentQuestions.length) {
                 showQuestion();
             } else {
-                showResult();
+                finishQuiz();
             }
         });
 
-        function showResult() {
+        function startTimer(duration) {
+            let timer = duration, minutes, seconds;
+            timerInterval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerDisplay.innerText = "⏳ " + minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    alert("انتهى الوقت!");
+                    finishQuiz();
+                }
+            }, 1000);
+        }
+
+        function finishQuiz() {
+            clearInterval(timerInterval);
+            clearProgress(); // Clear saved progress as quiz is done
+            
             quizScreen.classList.remove('active');
             resultScreen.classList.add('active');
 
             const percentage = Math.round((score / currentQuestions.length) * 100);
             document.getElementById('final-score').innerText = `${percentage}%`;
+            document.getElementById('score-circle').style.setProperty('--percentage', percentage);
+            
             document.getElementById('final-details').innerText = `أجبت بشكل صحيح على ${score} من أصل ${currentQuestions.length} سؤال`;
 
             const msgElement = document.getElementById('final-msg');
             if (percentage >= 90) {
-                msgElement.innerText = "ما شاء الله! أداء ممتاز يا بطل 🌟";
+                msgElement.innerText = "ما شاء الله! أداء أسطوري 🌟🏆";
                 msgElement.style.color = "var(--success-color)";
             } else if (percentage >= 60) {
                 msgElement.innerText = "جيد جداً، واصل التقدم 👍";
                 msgElement.style.color = "var(--secondary-color)";
             } else {
-                msgElement.innerText = "تحتاج إلى مزيد من المراجعة، لا تيأس 💪";
+                msgElement.innerText = "لا تيأس، المراجعة هي مفتاح النجاح 💪";
                 msgElement.style.color = "var(--danger-color)";
             }
 
@@ -665,8 +1012,8 @@
                 div.classList.add('review-item');
                 div.innerHTML = `
                     <span class="review-q">${index + 1}. ${item.question}</span>
-                    <p class="review-wrong">إجابتك: ${item.selected}</p>
-                    <p class="review-correct">الإجابة الصحيحة: ${item.correct}</p>
+                    <p style="color:var(--danger-color); margin-bottom:5px;">إجابتك: ${item.selected}</p>
+                    <p style="color:var(--success-color); font-weight:bold;">الإجابة الصحيحة: ${item.correct}</p>
                 `;
                 reviewList.appendChild(div);
             });
@@ -676,6 +1023,10 @@
             reviewScreen.classList.remove('active');
             resultScreen.classList.remove('active');
             startScreen.classList.add('active');
+            // Refresh saved progress button state
+            if (!localStorage.getItem('quizProgress')) {
+                resumeBtn.style.display = 'none';
+            }
         }
     </script>
 </body>
